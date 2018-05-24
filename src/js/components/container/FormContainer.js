@@ -8,7 +8,7 @@ class FormContainer extends Component {
     super();
 
     this.state = {
-      list: ["apple", "banana"],
+      list: customers,
       seo_title: "",
       searchResults: []
     };
@@ -20,7 +20,14 @@ class FormContainer extends Component {
   handleChange(event) {
     this.setState({ 
       [event.target.id]: event.target.value,
-      searchResults: this.state.list.filter(word => word.indexOf(event.target.value) !== -1)
+      searchResults: this.state.list.filter(customer => 
+        customer.name.indexOf(event.target.value) !== -1 ||
+        // customer.customer_number.indexOf(event.target.value) !== -1 ||
+        customer.address.indexOf(event.target.value) !== -1 ||
+        customer.date_of_birth.indexOf(event.target.value) !== -1 ||
+        customer.customer_type.indexOf(event.target.value) !== -1 ||
+        customer.phone_number.indexOf(event.target.value) !== -1
+      )
     });
   }
 
@@ -47,7 +54,7 @@ class FormContainer extends Component {
 
         <ul>
           {this.state.searchResults.map(function(result, i){
-            return <li>{result}</li>;
+            return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
           })}
         </ul>
 
