@@ -9,8 +9,7 @@ class FormContainer extends Component {
 
     this.state = {
       list: customers,
-      seo_title: "",
-      searchResults: []
+      customer_title: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,46 +17,59 @@ class FormContainer extends Component {
   }
 
   handleChange(event) {
-    this.setState({ 
-      [event.target.id]: event.target.value,
-      searchResults: this.state.list.filter(customer => 
-        customer.name.indexOf(event.target.value) !== -1 ||
-        // customer.customer_number.indexOf(event.target.value) !== -1 ||
-        customer.address.indexOf(event.target.value) !== -1 ||
-        customer.date_of_birth.indexOf(event.target.value) !== -1 ||
-        customer.customer_type.indexOf(event.target.value) !== -1 ||
-        customer.phone_number.indexOf(event.target.value) !== -1
-      )
-    });
+    this.setState({ [event.target.id]: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.seo_title);
+    console.log('An essay was submitted: ' + this.state.customer_title);
+    this.setState({ 
+      searchResults: this.state.list.filter(customer => 
+        customer.name.indexOf(this.state.customer_title) !== -1 ||
+        customer.address.indexOf(this.state.customer_title) !== -1 ||
+        customer.date_of_birth.indexOf(this.state.customer_title) !== -1 ||
+        customer.customer_type.indexOf(this.state.customer_title) !== -1 ||
+        customer.phone_number.indexOf(this.state.customer_title) !== -1
+      )
+    });
     event.preventDefault();
   }
 
   render() {
-    const { seo_title } = this.state;
+    const { customer_title } = this.state;
+
+    var result;
+    if (this.state.searchResults && this.state.searchResults.length == 1) {
+      result = (<div>{this.state.searchResults.map(function(result, i){
+        return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
+      })}</div>);
+    } else if (this.state.searchResults && this.state.searchResults.length == 0) {
+      result = (<div>No search results</div>);
+    } else if (this.state.searchResults){
+      result = (<ul>
+        {this.state.searchResults.map(function(result, i){
+          return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
+        })}
+      </ul>);
+    } else {
+      result = (
+        <div></div>
+      )
+    }
+
     return (
       <div>
         <form id="article-form" onSubmit={this.handleSubmit}>
           <Input
             text="Customer search"
-            label="seo_title"
+            label="customer_title"
             type="text"
-            id="seo_title"
-            value={seo_title}
+            id="customer_title"
+            value={customer_title}
             handleChange={this.handleChange}
           />
           <input type="submit" value="Submit" className="btn btn-primary"/>
         </form>
-
-        <ul>
-          {this.state.searchResults.map(function(result, i){
-            return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
-          })}
-        </ul>
-
+        {result}
       </div>
     );
 
