@@ -21,7 +21,7 @@ class FormContainer extends Component {
   }
 
   handleSubmit(event) {
-    console.log('An essay was submitted: ' + this.state.customer_title);
+    console.log('You searched for: ' + this.state.customer_title);
     this.setState({ 
       searchResults: this.state.list.filter(customer => 
         customer.name.indexOf(this.state.customer_title) !== -1 ||
@@ -39,37 +39,72 @@ class FormContainer extends Component {
 
     var result;
     if (this.state.searchResults && this.state.searchResults.length == 1) {
-      result = (<div>{this.state.searchResults.map(function(result, i){
-        return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
+      result = (<div className="row">{this.state.searchResults.map(function(result, i){
+        return <div key={i} id="single-result" className="col-sm-6">
+          <div className="card">
+            <div className="card-header">
+              <i className="fas fa-user"></i>{result.name}
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                  <li className="list-group-item">{result.customer_number}</li>
+                  <li className="list-group-item">{result.address}</li>
+                  <li className="list-group-item">{result.phone_number}</li>
+                  <li className="list-group-item">{result.date_of_birth}</li>
+                  <li className="list-group-item">{result.customer_type}</li>
+              </ul>
+            </div>
+          </div>
+        </div>;
       })}</div>);
     } else if (this.state.searchResults && this.state.searchResults.length == 0) {
       result = (<div>No search results</div>);
     } else if (this.state.searchResults){
-      result = (<ul>
+      result = (<div className="row">
         {this.state.searchResults.map(function(result, i){
-          return <li key={i}>{result.name}<br/>{result.customer_number}<br/>{result.address} {result.date_of_birth}<br/>{result.customer_type}<br/>{result.phone_number}<br/></li>;
+          return 
+          <div key={i} className="col-sm-6">
+            <div className="card">
+              <div className="card-header">
+                <i className="fas fa-user"></i>{result.name}
+              </div>
+              <div className="card-body">
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">{result.customer_number}</li>
+                    <li className="list-group-item">{result.address}</li>
+                    <li className="list-group-item">{result.phone_number}</li>
+                    <li className="list-group-item">{result.date_of_birth}</li>
+                    <li className="list-group-item">{result.customer_type}</li>
+                </ul>
+              </div>
+            </div>
+          </div>;
         })}
-      </ul>);
+      </div>);
     } else {
       result = (
-        <div></div>
+        <div className="row">test</div>
       )
     }
 
     return (
       <div>
-        <form id="article-form" onSubmit={this.handleSubmit}>
-          <Input
-            text="Customer search"
-            label="customer_title"
-            type="text"
-            id="customer_title"
-            value={customer_title}
-            handleChange={this.handleChange}
-          />
-          <input type="submit" value="Submit" className="btn btn-primary"/>
-        </form>
-        {result}
+        <div className="form-wrapper row">
+          <form id="article-form" className="col-sm-4" onSubmit={this.handleSubmit}>
+            <Input
+              text="Customer search"
+              label="customer_title"
+              type="text"
+              id="customer_title"
+              value={customer_title}
+              handleChange={this.handleChange}
+            />
+            <input type="submit" value="Submit" className="btn btn-primary"/>
+          </form>
+        </div>
+
+          {result}
+          
       </div>
     );
 
