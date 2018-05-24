@@ -25,5 +25,9 @@ module.exports = {
             template: "./src/index.html",
             filename: "./index.html"
         })
+    ],
+    loaders: [
+        { test: /\.json$/, loader: 'json' },
+        // other loaders 
     ]
 };
