@@ -2,6 +2,18 @@
 $border-color: #dee2e6;
 $shadow-color: rgba(223, 227, 231, 0.8);
 $bg-color: #fff;
+$md: 768px;
+
+// Fix ugly red outline for input field on FF
+input {
+    box-shadow: none;
+    &:-moz-placeholder {
+        box-shadow: none !important;
+    }
+    &:invalid {
+        box-shadow: 0 0 0px lime;
+    }    
+}
 
 // Add top carrot
 .top-triangle {
@@ -12,6 +24,10 @@ $bg-color: #fff;
     -webkit-filter: drop-shadow(0 1px 10px $shadow-color);
     -moz-box-shadow: 0 1px 10px $shadow-color;
     filter: drop-shadow(0 1px 10px $shadow-color);
+    top: -20px;
+    @media (min-width: $md) {
+        top: 0;
+    }
     &:after,
     &:before {
         bottom: 100%;
@@ -39,13 +55,39 @@ $bg-color: #fff;
 }
 
 // Adjust card styles
+.card {
+    border-radius: 0;
+}
+
 .card-header {
     border-bottom-width: 0;
     background-color: transparent;
+}
+
+// push card up closer to search form
+#single-result {
+    @media (min-width: $md) {
+        margin-top: -60px;   
+    }
 }
 
 // Adjust list styles
 .list-group-item {
     border-width: 0;
     padding: .5rem 1.25rem;
+}
+
+// add grid
+.grid {
+    display: grid;
+    grid-template-columns: 100%;
+    @media (min-width: $md) {
+        grid-template-columns: 16.666% 16.666% 16.666% 16.666% 16.666% 16.666%;
+        grid-gap: 10px;
+    }
+}
+
+// style page header
+.page-header {
+    background-color: $shadow-color;
 }

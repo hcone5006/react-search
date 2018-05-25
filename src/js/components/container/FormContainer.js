@@ -41,12 +41,12 @@ class FormContainer extends Component {
         if (this.state.searchResults && this.state.searchResults.length == 1) {
             result = this.state.searchResults.map(function(result, i){
                 return (
-                    <div key={i} id="single-result" className="col-sm-6">
+                    <div key={i} id="single-result" className="col-sm-6 col-md-4">
                         <div className="card my-4 top-triangle">
                             <div className="card-header">
                                 <i className="fas fa-user mr-2"></i><b>{result.name}</b>
                             </div>
-                            <div className="card-body p-0">
+                            <div className="card-body p-0 mb-1">
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">{result.customer_number}</li>
                                     <li className="list-group-item">{result.address}</li>
@@ -59,25 +59,31 @@ class FormContainer extends Component {
                     </div>);
             });
         } else if (this.state.searchResults && this.state.searchResults.length == 0) {
-            result = (<div className="col-sm-6">No search results</div>);
+            result = (<div className="col-sm-9 my-4">No search results</div>);
         } else if (this.state.searchResults){
             result = this.state.searchResults.map(function(result, i){
                     return (
-                    <div key={i} className="col-sm-6">
-                        <div className="card my-4">
-                            <div className="card-header">
-                                <i className="fas fa-user mr-2"></i><b>{result.name}</b>
-                            </div>
-                            <div className="card-body p-0">
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{result.customer_number}</li>
-                                    <li className="list-group-item">{result.address}</li>
-                                    <li className="list-group-item">{result.phone_number}</li>
-                                    <li className="list-group-item">{result.date_of_birth}</li>
-                                    <li className="list-group-item">{result.customer_type}</li>
-                                </ul>
-                            </div>
+                    <div class="row">
+                      <div className="col-6 col-sm-3 col-md-12 page-header d-md-none d-lg-none">
+                        <div className="border-bottom py-3 grid">
+                          <div>Name</div>
+                          <div>ID</div>
+                          <div>Address</div>
+                          <div>Phone Number</div>
+                          <div>Birth date</div>
+                          <div>Acc type</div>
                         </div>
+                      </div>
+                      <div key={i} className="col-6 col-sm-9 col-md-12">
+                        <div className="border-bottom py-3 grid">
+                          <div className=""><i className="fas fa-user mr-2"></i><b>{result.name}</b></div>
+                          <div className="">{result.customer_number}</div>
+                          <div className="">{result.address}</div>
+                          <div className="">{result.phone_number}</div>
+                          <div className="">{result.date_of_birth}</div>
+                          <div className="">{result.customer_type}</div>
+                        </div>
+                      </div>
                     </div>);
                 });
         } else {
@@ -88,8 +94,8 @@ class FormContainer extends Component {
 
         return (
             <div>
-                <div className="form-wrapper">
-                    <form id="article-form" className="col-sm-6 col-md-6 py-3 border rounded" onSubmit={this.handleSubmit}>
+                <div className="form-wrapper mb-4">
+                    <form id="article-form" className="col-sm-12 col-md-6 py-3 border rounded" onSubmit={this.handleSubmit}>
                         <Input
                             text="Search customer details"
                             label="customer_title"
@@ -101,8 +107,20 @@ class FormContainer extends Component {
                     </form>
                 </div>
                 <div className="row">
-                  {result}
+                  <div className="col-sm-3 col-md-12 page-header py-2 d-sm-none d-none d-md-block">
+                    <div className="grid">
+                      <div>Name</div>
+                      <div>ID</div>
+                      <div>Address</div>
+                      <div>Phone Number</div>
+                      <div>Birth date</div>
+                      <div>Acc type</div>
+                    </div>
+                  </div>
                 </div>
+
+                  {result}
+                
             </div>
         );
 
