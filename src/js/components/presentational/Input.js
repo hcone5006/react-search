@@ -3,15 +3,20 @@ import PropTypes from "prop-types";
 
 const Input = ({ label, text, type, id, value, handleChange }) => (
   <div className="form-group">
-    <label htmlFor={label}>{text}</label>
-    <input
-      type={type}
-      className="form-control"
-      id={id}
-      value={value}
-      onChange={handleChange}
-      required
-    />
+    <div class="input-group mb-3">
+      <input
+        type={type}
+        className="form-control"
+        id={id}
+        placeholder={text}
+        value={value}
+        onChange={handleChange}
+        required
+      />
+      <div class="input-group-append">
+        <input type="submit" value="Search" className="btn btn-primary"/>
+      </div>
+    </div>
   </div>
 );
 

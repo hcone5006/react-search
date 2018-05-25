@@ -1,2 +1,36 @@
-.card-body {
-  padding: 0; }
+.top-triangle {
+  position: relative;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+  -webkit-filter: drop-shadow(0 1px 10px rgba(223, 227, 231, 0.8));
+  -moz-box-shadow: 0 1px 10px rgba(223, 227, 231, 0.8);
+  filter: drop-shadow(0 1px 10px rgba(223, 227, 231, 0.8)); }
+  .top-triangle:after, .top-triangle:before {
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none; }
+  .top-triangle:after {
+    border-color: transparent;
+    border-bottom-color: #fff;
+    border-width: 19px;
+    left: 30%;
+    margin-left: -19px; }
+  .top-triangle:before {
+    border-color: transparent;
+    border-bottom-color: #dee2e6;
+    border-width: 20px;
+    left: 30%;
+    margin-left: -20px; }
+
+.card-header {
+  border-bottom-width: 0;
+  background-color: transparent; }
+
+.list-group-item {
+  border-width: 0;
+  padding: .5rem 1.25rem; }

@@ -1,3 +1,51 @@
-.card-body {
-    padding: 0;
+// Variables
+$border-color: #dee2e6;
+$shadow-color: rgba(223, 227, 231, 0.8);
+$bg-color: #fff;
+
+// Add top carrot
+.top-triangle {
+    position: relative;
+    background: $bg-color;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    -webkit-filter: drop-shadow(0 1px 10px $shadow-color);
+    -moz-box-shadow: 0 1px 10px $shadow-color;
+    filter: drop-shadow(0 1px 10px $shadow-color);
+    &:after,
+    &:before {
+        bottom: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: transparent;
+        border-bottom-color: $bg-color;
+        border-width: 19px;
+        left: 30%;
+        margin-left: -19px;
+    }
+    &:before {
+        border-color: transparent;
+        border-bottom-color: $border-color;
+        border-width: 20px;
+        left: 30%;
+        margin-left: -20px;
+    }
+}
+
+// Adjust card styles
+.card-header {
+    border-bottom-width: 0;
+    background-color: transparent;
+}
+
+// Adjust list styles
+.list-group-item {
+    border-width: 0;
+    padding: .5rem 1.25rem;
 }

@@ -42,11 +42,11 @@ class FormContainer extends Component {
             result = this.state.searchResults.map(function(result, i){
                 return (
                     <div key={i} id="single-result" className="col-sm-6">
-                        <div className="card">
+                        <div className="card my-4 top-triangle">
                             <div className="card-header">
-                                <i className="fas fa-user"></i>{result.name}
+                                <i className="fas fa-user mr-2"></i><b>{result.name}</b>
                             </div>
-                            <div className="card-body">
+                            <div className="card-body p-0">
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">{result.customer_number}</li>
                                     <li className="list-group-item">{result.address}</li>
@@ -59,16 +59,16 @@ class FormContainer extends Component {
                     </div>);
             });
         } else if (this.state.searchResults && this.state.searchResults.length == 0) {
-            result = (<div>No search results</div>);
+            result = (<div className="col-sm-6">No search results</div>);
         } else if (this.state.searchResults){
             result = this.state.searchResults.map(function(result, i){
                     return (
                     <div key={i} className="col-sm-6">
-                        <div className="card">
+                        <div className="card my-4">
                             <div className="card-header">
-                                <i className="fas fa-user"></i>{result.name}
+                                <i className="fas fa-user mr-2"></i><b>{result.name}</b>
                             </div>
-                            <div className="card-body">
+                            <div className="card-body p-0">
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">{result.customer_number}</li>
                                     <li className="list-group-item">{result.address}</li>
@@ -82,28 +82,27 @@ class FormContainer extends Component {
                 });
         } else {
             result = (
-                <div className="row">test</div>
+                <div></div>
             )
         }
 
         return (
             <div>
-                <div className="form-wrapper row">
-                    <form id="article-form" className="col-sm-4" onSubmit={this.handleSubmit}>
+                <div className="form-wrapper">
+                    <form id="article-form" className="col-sm-6 col-md-6 py-3 border rounded" onSubmit={this.handleSubmit}>
                         <Input
-                            text="Customer search"
+                            text="Search customer details"
                             label="customer_title"
                             type="text"
                             id="customer_title"
                             value={customer_title}
                             handleChange={this.handleChange}
                         />
-                        <input type="submit" value="Submit" className="btn btn-primary"/>
                     </form>
                 </div>
-
-                {result}
-
+                <div className="row">
+                  {result}
+                </div>
             </div>
         );
 
